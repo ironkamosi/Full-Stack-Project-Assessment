@@ -1,3 +1,15 @@
 .App {
   text-align: center;
 }
+
+.red {
+  color: #dc143c;
+}
+
+.green {
+  color: #00ff00;
+}
+
+.black{
+  color: black;
+}

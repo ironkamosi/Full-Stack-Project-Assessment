@@ -1,12 +1,15 @@
 import "./App.css";
 import React from "react";
+import VideoCards from "./VideoCards.jsx"
 
 function App() {
-  return (
+
+return (  
     <div className="App">
       <header className="App-header">
         <h1>Video Recommendation</h1>
       </header>
+    <VideoCards />
     </div>
   );
 }
