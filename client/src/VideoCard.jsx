@@ -3,11 +3,13 @@ import { Button, Card, ButtonGroup } from "react-bootstrap";
 import CounterButtons from "./CounterButtons.jsx";
 
 const VideoCard = (props) => {
-  function deleteHandler(e) {
+//   console.log("props vd", props.video.id);
+// console.log("props", props)
+  function handleClick(e) {
     e.preventDefault();
-    const videoId = e.target.parentNode.parentNode.parentNode.id;
-
+    const videoId = props.video.id;
     props.deleteHandler(videoId);
+    // console.log( "video Card", props.deleteHandler(videoId))
   }
   return (
     <Card style={{ width: "18rem" }} id={props.video.id}>
@@ -25,7 +27,7 @@ const VideoCard = (props) => {
       <Card.Body>
         <ButtonGroup className="mr-2" aria-label="First group">
           <CounterButtons />
-          <Button onClick={deleteHandler}>Delete</Button>
+          <Button onClick={handleClick}>Delete</Button>
         </ButtonGroup>
       </Card.Body>
     </Card>
