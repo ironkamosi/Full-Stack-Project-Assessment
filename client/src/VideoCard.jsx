@@ -18,7 +18,8 @@ const VideoCard = (props) => {
         width="560"
         height="315"
         src={props.video.url.replace("watch?v=", "embed/")}
-        title="YouTube video player"
+        title={props.video.title}
+        // "YouTube video player"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
