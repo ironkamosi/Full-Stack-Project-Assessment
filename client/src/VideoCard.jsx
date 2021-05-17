@@ -28,7 +28,7 @@ const VideoCard = (props) => {
       <Card.Body>
         <ButtonGroup className="mr-2" aria-label="First group">
           <CounterButtons />
-          <Button onClick={handleClick}>Delete</Button>
+          <Button variant="danger" onClick={handleClick}>Delete</Button>
         </ButtonGroup>
       </Card.Body>
     </Card>

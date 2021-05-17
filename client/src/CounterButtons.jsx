@@ -5,7 +5,7 @@ const CounterButtons = () => {
   const [likeCounter, setLikeCounter] = useState(0);
 
   function handleClick(e) {
-    e.target.id === "like-button"
+    e.target.id  === "like-button"
       ? setLikeCounter(likeCounter + 1)
       : setLikeCounter(likeCounter - 1);
     console.log("The button has been clicked.");
@@ -16,7 +16,7 @@ const CounterButtons = () => {
       <Button id="like-button" variant="primary" onClick={handleClick}>
         &#128077;
       </Button>{" "}
-      <Button id="dislike_button" variant="primary" onClick={handleClick}>
+      <Button id="dislike-button" variant="primary" onClick={handleClick}>
         &#128078;
       </Button>{" "}
       <span
