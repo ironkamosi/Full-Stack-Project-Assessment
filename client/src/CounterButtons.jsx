@@ -5,12 +5,12 @@ const CounterButtons = () => {
   const [likeCounter, setLikeCounter] = useState(0);
 
   function handleClick(e) {
-    e.target.id  === "like-button"
+    e.target.id === "like-button"
       ? setLikeCounter(likeCounter + 1)
       : setLikeCounter(likeCounter - 1);
     console.log("The button has been clicked.");
   }
-
+  
   return (
     <div>
       <Button id="like-button" variant="primary" onClick={handleClick}>

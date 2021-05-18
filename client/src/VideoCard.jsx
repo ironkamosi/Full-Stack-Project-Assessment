@@ -3,14 +3,27 @@ import { Button, Card, ButtonGroup } from "react-bootstrap";
 import CounterButtons from "./CounterButtons.jsx";
 
 const VideoCard = (props) => {
-//   console.log("props vd", props.video.id);
-// console.log("props", props)
+  //   console.log("props vd", props.video.id);
+  // console.log("props", props)
   function handleClick(e) {
     e.preventDefault();
     const videoId = props.video.id;
     props.deleteHandler(videoId);
     // console.log( "video Card", props.deleteHandler(videoId))
   }
+
+  const date = Date(Date.now());
+  const currentDate = date.toString(); 
+
+  
+  // const newDate = new Date();
+  // console.log("test this", newDate);
+
+  // Use of Date.now() method
+ 
+  // const formatedDate = newDate.toLocaleDateString();
+  
+
   return (
     <Card style={{ width: "18rem" }} id={props.video.id}>
       <Card.Title> {props.video.title}</Card.Title>
@@ -19,16 +32,19 @@ const VideoCard = (props) => {
         height="315"
         src={props.video.url.replace("watch?v=", "embed/")}
         title={props.video.title}
-        // "YouTube video player"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-
+      <div>
+        <p>{`Upload date: ${currentDate}`} </p>
+      </div>
       <Card.Body>
         <ButtonGroup className="mr-2" aria-label="First group">
           <CounterButtons />
-          <Button variant="danger" onClick={handleClick}>Delete</Button>
+          <Button variant="danger" onClick={handleClick}>
+            Delete
+          </Button>
         </ButtonGroup>
       </Card.Body>
     </Card>

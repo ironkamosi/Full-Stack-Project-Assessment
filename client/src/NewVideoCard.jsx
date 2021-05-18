@@ -1,13 +1,24 @@
+
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+
 // video data get node
-const NewVideoCard = ({ onAdd }) => {
+const NewVideoCard = ({ onAdd, timeStamp}) => {
   const [newVideoURL, setNewVideoURL] = useState("");
   const [newVideoTitle, setNewVideoTitle] = useState("");
   //      id: 100 + Math.random() * 200, mathfloor
+
+  // function timeStamp) {
+    
+  // }
+  // const date = Date(Date.now());
+  // const currentDate = date.toString(); 
+
+  
+
   const addHandler = (event) => {
     event.preventDefault();
-
     console.log(newVideoURL);
     console.log(newVideoTitle);
     const new_entry = {
@@ -15,6 +26,7 @@ const NewVideoCard = ({ onAdd }) => {
       url: newVideoURL,
       title: newVideoTitle,
       rating: 0,
+      date: {timeStamp}
     };
     onAdd(new_entry);
   };
