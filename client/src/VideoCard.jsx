@@ -3,15 +3,12 @@ import { Button, Card, ButtonGroup } from "react-bootstrap";
 import CounterButtons from "./CounterButtons.jsx";
 
 const VideoCard = (props) => {
-  //   console.log("props vd", props.video.id);
-  // console.log("props", props)
+  console.log("props", props.video)
   function handleClick(e) {
     e.preventDefault();
     const videoId = props.video.id;
     props.deleteHandler(videoId);
-    // console.log( "video Card", props.deleteHandler(videoId))
   }
-
   const date = Date(Date.now());
   const currentDate = date.toString(); 
 
@@ -37,11 +34,12 @@ const VideoCard = (props) => {
         allowFullScreen
       ></iframe>
       <div>
+      
         <p>{`Upload date: ${currentDate}`} </p>
       </div>
       <Card.Body>
         <ButtonGroup className="mr-2" aria-label="First group">
-          <CounterButtons />
+          <CounterButtons rating={props.video.rating} />
           <Button variant="danger" onClick={handleClick}>
             Delete
           </Button>

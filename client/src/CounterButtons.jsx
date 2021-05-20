@@ -1,23 +1,36 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 
-const CounterButtons = () => {
-  const [likeCounter, setLikeCounter] = useState(0);
+const CounterButtons = ({rating}) => {
+  const [likeCounter, setLikeCounter] = useState(rating || 0);
 
   function handleClick(e) {
-    e.target.id === "like-button"
+    e.preventDefault();
+    // console.log("e target",e.target)
+    if (e.target.name === "like-button") {
+      console.log("like name")
+    }
+    
+   if (e.target.className === "dislike-button") {
+          console.log(" dislike name");
+    }
+ 
+    e.target.name === "like-button"
       ? setLikeCounter(likeCounter + 1)
       : setLikeCounter(likeCounter - 1);
-    console.log("The button has been clicked.");
+            // e.stopPropagation();
+
+    // console.log("The button has been clicked.");
   }
-  
+
   return (
     <div>
-      <Button id="like-button" variant="primary" onClick={handleClick}>
-        &#128077;
+      <Button name="like-button" variant="primary" onClick={handleClick}>
+          <FaThumbsUp />
       </Button>{" "}
-      <Button id="dislike-button" variant="primary" onClick={handleClick}>
-        &#128078;
+      <Button name="dislike-button" variant="primary" onClick={handleClick}>
+          <FaThumbsDown />
       </Button>{" "}
       <span
         className={

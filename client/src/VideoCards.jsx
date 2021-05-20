@@ -2,12 +2,24 @@ import React from "react";
 // import NewVideoCard from "./NewVideoCard"
 import VideoCard from "./VideoCard.jsx";
 
-const VideoCards = ({videos, removeVideo}) => {
+function compare(videoOne, videoTwo) {
+  // This helps put the array in order
+  if (videoOne.rating > videoTwo.rating) {
+    return -1;
+  }
+  if (videoOne.rating < videoTwo.rating) {
+    return 1;
+  }
+  return 0;
+}
+
+const VideoCards = ({ videos, removeVideo }) => {
+  const sortedData = videos.sort(compare);
   return (
     <div>
-      {videos.map((video) => {
+      {sortedData.map((videos, index) => {
         return (
-          <VideoCard deleteHandler={removeVideo} key={video.id} video={video} />
+          <VideoCard deleteHandler={removeVideo} key={index} video={videos} />
         );
       })}
     </div>

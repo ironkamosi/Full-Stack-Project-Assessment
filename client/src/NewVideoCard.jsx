@@ -1,32 +1,26 @@
-
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+const dayjs = require("dayjs");
 
+const timeStamp = dayjs();
+const date = timeStamp.toString();
 
 // video data get node
-const NewVideoCard = ({ onAdd, timeStamp}) => {
+const NewVideoCard = ({ onAdd }) => {
   const [newVideoURL, setNewVideoURL] = useState("");
   const [newVideoTitle, setNewVideoTitle] = useState("");
-  //      id: 100 + Math.random() * 200, mathfloor
-
-  // function timeStamp) {
-    
-  // }
-  // const date = Date(Date.now());
-  // const currentDate = date.toString(); 
-
-  
 
   const addHandler = (event) => {
     event.preventDefault();
     console.log(newVideoURL);
     console.log(newVideoTitle);
+
     const new_entry = {
-      id: 100 + Math.random() * 200, // fix the id
-      url: newVideoURL,
+      id: 0,
+      url: newVideoURL.replace("watch?v=", "embed/"),
       title: newVideoTitle,
       rating: 0,
-      date: {timeStamp}
+      date: date,
     };
     onAdd(new_entry);
   };
@@ -45,6 +39,7 @@ const NewVideoCard = ({ onAdd, timeStamp}) => {
         <input
           onChange={(event) => setNewVideoURL(event.target.value)}
           type="text"
+          pattern="https://www.youtube.com/.*"
           placeholder="Submit the URL of the YouTube video"
           required
         />

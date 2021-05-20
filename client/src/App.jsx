@@ -22,15 +22,16 @@ function App() {
     console.log("VID", videoId);
     // videoData.find(videoId).splice(-1);
   }
-
+  
   return (
     <div className="App">
-      <Header/>
+      <Header />
+      {/* {videos.length} */}
       {/* <header className="App-header">
         <h1>Video Recommendation</h1>
       </header> */}
-      <NewVideoCard onAdd={onAdd} timeStamp={currentDate} />
-      <VideoCards videos={videos} removeVideo={removeVideo}  />
+      <NewVideoCard onAdd={onAdd} />
+      <VideoCards videos={videos} removeVideo={removeVideo} />
     </div>
   );
 }
