@@ -12,15 +12,6 @@ const VideoCard = (props) => {
   const date = Date(Date.now());
   const currentDate = date.toString(); 
 
-  
-  // const newDate = new Date();
-  // console.log("test this", newDate);
-
-  // Use of Date.now() method
- 
-  // const formatedDate = newDate.toLocaleDateString();
-  
-
   return (
     <Card style={{ width: "18rem" }} id={props.video.id}>
       <Card.Title> {props.video.title}</Card.Title>

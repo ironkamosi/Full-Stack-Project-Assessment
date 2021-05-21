@@ -1,5 +1,4 @@
 import React from "react";
-// import NewVideoCard from "./NewVideoCard"
 import VideoCard from "./VideoCard.jsx";
 
 function compare(videoOne, videoTwo) {

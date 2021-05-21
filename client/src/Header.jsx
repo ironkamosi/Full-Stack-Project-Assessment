@@ -5,7 +5,6 @@ const Header = () => {
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="#home" className="nav-title">Video Recommendations</Navbar.Brand>
-    
     </Navbar>
   );
 };
