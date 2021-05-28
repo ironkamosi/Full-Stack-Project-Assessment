@@ -1,5 +1,5 @@
 const express = require("express");
-const { Pool } = require("pg");// postgres 
+const { Pool } = require("pg"); // postgres
 const app = express();
 const cors = require("cors");
 const youTubeData = require("./exampleresponse.json");
@@ -55,16 +55,20 @@ app.post("/", (req, res) => {
 });
 
 app.delete("/:id", (req, res) => {
-      console.log("rpi", req.params.id);
+  console.log("rpi", req.params.id);
 
   try {
     const videoIndex = youTubeData.findIndex(
       (video) => video.id === parseInt(req.params.id)
     );
-    if (videoIndex >= 0) { // fix
+    if (videoIndex >= 0) {
+      // fix
       youTubeData.splice(videoIndex, 1);
     }
-    return res.sendStatus(204);
+    return res.status(200).json({
+      result: "successful",
+      message: "Video was deleted",
+    });
   } catch {
     res.status(500).json({
       result: "failure",
