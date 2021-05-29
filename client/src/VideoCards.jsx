@@ -46,7 +46,7 @@ function compare(videoOne, videoTwo) {
   //     .catch((e) => console.log(e));
   // }
 const VideoCards = (props) => {
-  console.log("videoC's", props)
+  // console.log("videoC's", props)
   const sortedData = props.videos.sort(compare);
   return (
     <div>
