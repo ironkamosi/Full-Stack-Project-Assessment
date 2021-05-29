@@ -27,7 +27,6 @@ const NewVideoCard = ({ onAdd }) => {
       rating: 0,
       date: date,
     };
-    onAdd(new_entry);
 
     // POST request using fetch()
     fetch(`http://127.0.0.1:5000`, {
@@ -45,7 +44,11 @@ const NewVideoCard = ({ onAdd }) => {
       // Converting to JSON
       .then((response) => response.json())
       // Displaying results to console
-      .then((json) => console.log(json))
+      .then((json) => {
+        console.log(json);
+        //right here: first time we know the ID for the video
+        onAdd(json);
+      })
       .catch((e) => console.log(e));
   };
 

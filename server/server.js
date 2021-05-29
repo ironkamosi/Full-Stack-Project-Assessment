@@ -50,12 +50,12 @@ app.post("/", (req, res) => {
     const id = Math.floor(Math.random(0, 1) * 1000000);
     youTubeData.push({ ...newVideo, id: id });
     res.status(201); // Created
-    res.send(newVideo);
+    res.send({ ...newVideo, id: id });
   }
 });
 
 app.delete("/:id", (req, res) => {
-  // console.log("rpi", req.params.id);
+  console.log("rpi", req.params.id);
 
   try {
     const videoIndex = youTubeData.findIndex(

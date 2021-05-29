@@ -52,3 +52,88 @@
 //   );
 // };
 
+/////////////////////////////
+//video card
+
+
+  // useEffect(() => {
+    // DELETE request using fetch inside useEffect React hook
+    // fetch(`http://127.0.0.1:5000/${id}`, {
+    //   method: "DELETE",
+    // });
+      
+      // .then(() => setStatus("Delete successful"));
+
+    // empty dependency array means this effect will only run once (like componentDidMount in classes)
+  // }, []);
+    
+    
+    
+    
+// useEffect(() => {
+//   // DELETE request using fetch inside useEffect React hook
+//   fetch(`http://127.0.0.1:5000/${id}`, {
+//     method: "DELETE",
+//   }).then(() => console.log("de"));
+
+//   // empty dependency array means this effect will only run once (like componentDidMount in classes)
+// }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // fetch(`http://127.0.0.1:5000/523523`, {
+    //   method: "DELETE",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: null,
+    // })
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((data) =>
+    //     // this is the data we get after putting our data, do whatever you want with this data
+    //     console.log(data)
+        
+    //   );
+
+    // fetch(`http://127.0.0.1:5000/${id}`, {
+    //   // Adding method type
+    //   method: "DELETE",
+
+    //   // Adding body or contents to send
+    //   body: null,
+
+    //   // Adding headers to the request
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //   },
+    // })
+    //   // Converting to JSON
+    //   .then((response) => response)
+    //   // Displaying results to console
+    //   .then((json) => {
+    //     if (json.status === 200) {
+    //       const videoIndex = video.videos.findIndex(
+    //         (video) => video.id === parseInt(videoId)
+    //       );
+    //       if (videoIndex >= 0) {
+    //         // video.videos.splice(videoIndex, 1);
+    //         video.setVideos(video.videos);
+    //       }
+    //     }
+    //     return console.log("res stat", json.status);
+    //   })
+    //   .catch((error) => console.log(error));

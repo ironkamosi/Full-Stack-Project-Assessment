@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button, Card, ButtonGroup } from "react-bootstrap";
 import CounterButtons from "./CounterButtons.jsx";
 
@@ -6,12 +6,35 @@ const VideoCard = (video, videos, setVideos) => {
   const date = Date(Date.now());
   const currentDate = date.toString();
 
+ 
   function removeVideo(event) {
-    console.log("removeVideo", video.video.id);
-    fetch(`http://127.0.0.1:5000/${video.video.id}`, {
-      method: "DELETE",
-    });
-     //TODO: Need to remove video card from client (browser) display
+    const videoId = video.video.id
+    console.log("vid", videoId);
+   
+      
+  fetch(`http://127.0.0.1:5000/${videoId}`, {
+  	method: 'DELETE',
+  	headers: {
+    'Content-Type': 'application/json'
+  	},
+  	body: null //if you do not want to send any addional data,  replace the complete JSON.stringify(YOUR_ADDITIONAL_DATA) with null
+		})  
+  	//Converting to JSON
+    .then((response) => response)
+       // Displaying results to console
+    .then((json) => {
+         if (json.status === 200) {
+           const videoIndex = video.videos.findIndex(
+             (video) => video.id === parseInt(videoId)
+           );
+           if (videoIndex >= 0) {
+              video.videos.splice(videoIndex, 1);
+             video.setVideos(video.videos);
+           }
+         }
+        return console.log("res stat", json.status);
+      })
+    .catch((error) => console.log(error));
   }
 
   return (
@@ -43,7 +66,6 @@ const VideoCard = (video, videos, setVideos) => {
           </ButtonGroup>
         </Card.Body>
       </Card>
-      {/* <p></p>Status: {status} */}
     </div>
   );
 };
