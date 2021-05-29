@@ -55,7 +55,7 @@ app.post("/", (req, res) => {
 });
 
 app.delete("/:id", (req, res) => {
-  console.log("rpi", req.params.id);
+  // console.log("rpi", req.params.id);
 
   try {
     const videoIndex = youTubeData.findIndex(
