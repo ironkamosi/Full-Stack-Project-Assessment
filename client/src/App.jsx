@@ -5,8 +5,12 @@ import VideoCards from "./VideoCards.jsx";
 import NewVideoCard from "./NewVideoCard";
 // import videoData from "./video_data/exampleresponse.json";
 
+
 function App() {
+// const [videoRanking, setvideoRanking]= useState()
+
   const [videos, setVideos] = useState([]);
+
   function onAdd(newVideo) {
     setVideos([...videos, newVideo]);
   }

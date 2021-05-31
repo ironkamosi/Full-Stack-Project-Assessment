@@ -1,28 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Card, ButtonGroup } from "react-bootstrap";
 import CounterButtons from "./CounterButtons.jsx";
 
-const VideoCard = (video, videos, setVideos) => {
+const VideoCard = (props) => {
   const date = Date(Date.now());
   const currentDate = date.toString();
+  const [likeCounter, setLikeCounter] = useState(props.video.rating || 0);
 
-  function removeVideo(event) {
-    console.log("removeVideo", video.video.id);
-    fetch(`http://127.0.0.1:5000/${video.video.id}`, {
+  function removeVideo() {
+    const id = props.video.id;
+    fetch(`http://127.0.0.1:5000/${id}`, {
       method: "DELETE",
     });
-     //TODO: Need to remove video card from client (browser) display
+    window.location.reload();
+    console.log("removeVideo", props.video.id);
+    //TODO: Need to remove video card from client (browser) display
+  }
+
+  function updateRating(counterLikeValue) {
+    const id = props.video.id;
+    // PUT request using fetch()
+    fetch(`http://127.0.0.1:5000/${id}`, {
+      // Adding method type
+      method: "PUT",
+
+      // Adding body or contents to send
+      body: JSON.stringify({ rating: counterLikeValue }), // the like counter from counter buttons
+
+      // Adding headers to the request
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      // Converting to JSON
+      .then((response) => {
+        if (response.status === 200) {
+          return setLikeCounter(counterLikeValue);
+        }
+      })
+      // Displaying results to console
+      // .then((json) => {
+      //   console.log(json);
+      //   //right here: first time we know the ID for the video
+
+      // })
+      .catch((e) => console.log(e));
   }
 
   return (
     <div>
-      <Card style={{ width: "18rem" }} id={video.video.id}>
-        <Card.Title> {video.video.title}</Card.Title>
+      <Card style={{ width: "18rem" }} id={props.video.id}>
+        <Card.Title> {props.video.title}</Card.Title>
         <iframe
           width="560"
           height="315"
-          src={video.video.url.replace("watch?v=", "embed/")}
-          title={video.video.title}
+          src={props.video.url.replace("watch?v=", "embed/")}
+          title={props.video.title}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
@@ -32,18 +65,20 @@ const VideoCard = (video, videos, setVideos) => {
         </div>
         <Card.Body>
           <ButtonGroup className="mr-2" aria-label="First group">
-            <CounterButtons rating={video.video.rating} />
+            <CounterButtons
+              onUpdateRating={updateRating}
+              rating={likeCounter}
+            />
             <Button
               variant="danger"
               onClick={removeVideo}
-              videoid={video.video.id}
+              videoid={props.video.id}
             >
               Delete
             </Button>
           </ButtonGroup>
         </Card.Body>
       </Card>
-      {/* <p></p>Status: {status} */}
     </div>
   );
 };

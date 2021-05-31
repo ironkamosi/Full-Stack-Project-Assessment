@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 
-const CounterButtons = ({ rating }) => {
-  const [likeCounter, setLikeCounter] = useState(rating || 0);
+const CounterButtons = (props) => {
+  // const [likeCounter, setLikeCounter] = useState(props.rating || 0);
 
+  let counterLikes = props.rating
   function handleClick(e) {
     e.preventDefault();
-    // console.log("e target",e.target)
+    console.log("e target", e.target.className);
     if (e.target.name === "like-button") {
       console.log("like name");
     }
@@ -16,25 +17,32 @@ const CounterButtons = ({ rating }) => {
       console.log(" dislike name");
     }
 
-    e.target.name === "like-button"
-      ? setLikeCounter(likeCounter + 1)
-      : setLikeCounter(likeCounter - 1);
+    // e.target.className === "like-btn"
+    e.target.className.includes("fas fa-thumbs-up")
+      ? (counterLikes += 1)
+      : (counterLikes -= 1);
+    // ? setLikeCounter(props.rating + 1)
+    // : setLikeCounter(props.rating - 1);
+    console.log("likeCounter", props.rating);
+    //  props.onUpdateRating(props.rating);
+    props.onUpdateRating(counterLikes);
+    
   }
 
   return (
     <div>
-      <Button name="like-button" variant="primary" onClick={handleClick}>
-        <FaThumbsUp />
+      <Button variant="primary">
+        <i className="fas fa-thumbs-up" onClick={handleClick}></i>
       </Button>{" "}
-      <Button name="dislike-button" variant="primary" onClick={handleClick}>
-        <FaThumbsDown />
-      </Button>{" "}
+      <Button variant="primary">
+        <i className="fas fa-thumbs-down" onClick={handleClick}></i>
+      </Button>
       <span
         className={
-          likeCounter === 0 ? "black" : likeCounter > 0 ? "green" : "red"
+          props.rating === 0 ? "black" : props.rating > 0 ? "green" : "red"
         }
       >
-        {likeCounter}
+        {props.rating}
       </span>
     </div>
   );

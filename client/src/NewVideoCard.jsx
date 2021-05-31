@@ -21,7 +21,7 @@ const NewVideoCard = ({ onAdd }) => {
     console.log(newVideoTitle);
 
     const new_entry = {
-      id: 0,
+      // id: 0,
       url: newVideoURL.replace("watch?v=", "embed/"),
       title: newVideoTitle,
       rating: 0,

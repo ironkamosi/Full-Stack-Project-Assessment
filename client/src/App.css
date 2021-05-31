@@ -1,7 +1,10 @@
 
-.App {
-  text-align: center;
-}
+/* .App {
+display:flex;
+flex-wrap: wrap;
+justify-content: center;
+} */
+
 
 .red {
   color: #dc143c;
@@ -21,4 +24,13 @@
     height:300px; 
     align-self:left;
     padding-left: 20px
+}
+/* 
+.like-btn, .dislike-btn{
+z-index: 0 ;
+} */
+
+Button{
+z-index: 100;
+padding: 0 !important;
 }
