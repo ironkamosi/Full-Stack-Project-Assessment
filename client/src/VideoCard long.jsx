@@ -8,32 +8,29 @@ const VideoCard = (video, videos, setVideos) => {
 
  
   function removeVideo(event) {
-    const videoId = video.video.id
-    console.log("vid", videoId);
-   
-      
-  fetch(`http://127.0.0.1:5000/${videoId}`, {
-  	method: 'DELETE',
-  	headers: {
-    'Content-Type': 'application/json'
-  	},
-  	body: null //if you do not want to send any addional data,  replace the complete JSON.stringify(YOUR_ADDITIONAL_DATA) with null
-		})  
-  	//Converting to JSON
+    const videoId = video.video.id;
+  fetch(`https://youtube-videos-db.herokuapp.com/${videoId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: null, //if you do not want to send any addional data,  replace the complete JSON.stringify(YOUR_ADDITIONAL_DATA) with null
+  })
+    //Converting to JSON
     .then((response) => response)
-       // Displaying results to console
+    // Displaying results to console
     .then((json) => {
-         if (json.status === 200) {
-           const videoIndex = video.videos.findIndex(
-             (video) => video.id === parseInt(videoId)
-           );
-           if (videoIndex >= 0) {
-              video.videos.splice(videoIndex, 1);
-             video.setVideos(video.videos);
-           }
-         }
-        return console.log("res stat", json.status);
-      })
+      if (json.status === 200) {
+        const videoIndex = video.videos.findIndex(
+          (video) => video.id === parseInt(videoId)
+        );
+        if (videoIndex >= 0) {
+          video.videos.splice(videoIndex, 1);
+          video.setVideos(video.videos);
+        }
+      }
+      return console.log("res stat", json.status);
+    })
     .catch((error) => console.log(error));
   }
 

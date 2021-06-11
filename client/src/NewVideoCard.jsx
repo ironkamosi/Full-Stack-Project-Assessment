@@ -10,18 +10,10 @@ const NewVideoCard = ({ onAdd }) => {
   const [newVideoURL, setNewVideoURL] = useState("");
   const [newVideoTitle, setNewVideoTitle] = useState("");
 
-  //http://127.0.0.1/5000
-  //http://127.0.0.1:5000/
-  //http://localhost:5000/
-
-
   const addHandler = (event) => {
     event.preventDefault();
-    console.log(newVideoURL);
-    console.log(newVideoTitle);
 
     const new_entry = {
-      // id: 0,
       url: newVideoURL.replace("watch?v=", "embed/"),
       title: newVideoTitle,
       rating: 0,
@@ -29,7 +21,7 @@ const NewVideoCard = ({ onAdd }) => {
     };
 
     // POST request using fetch()
-    fetch(`http://127.0.0.1:5000`, {
+    fetch(`https://youtube-videos-db.herokuapp.com/`, {
       // Adding method type
       method: "POST",
 
@@ -45,7 +37,6 @@ const NewVideoCard = ({ onAdd }) => {
       .then((response) => response.json())
       // Displaying results to console
       .then((json) => {
-        console.log(json);
         //right here: first time we know the ID for the video
         onAdd(json);
       })

@@ -9,18 +9,17 @@ const VideoCard = (props) => {
 
   function removeVideo() {
     const id = props.video.id;
-    fetch(`http://127.0.0.1:5000/${id}`, {
+    fetch(`https://youtube-videos-db.herokuapp.com/${id}`, {
       method: "DELETE",
     });
     window.location.reload();
-    console.log("removeVideo", props.video.id);
     //TODO: Need to remove video card from client (browser) display
   }
 
   function updateRating(counterLikeValue) {
     const id = props.video.id;
     // PUT request using fetch()
-    fetch(`http://127.0.0.1:5000/${id}`, {
+    fetch(`https://youtube-videos-db.herokuapp.com/{id}`, {
       // Adding method type
       method: "PUT",
 
@@ -38,12 +37,7 @@ const VideoCard = (props) => {
           return setLikeCounter(counterLikeValue);
         }
       })
-      // Displaying results to console
-      // .then((json) => {
-      //   console.log(json);
-      //   //right here: first time we know the ID for the video
-
-      // })
+   
       .catch((e) => console.log(e));
   }
 
