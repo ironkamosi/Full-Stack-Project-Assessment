@@ -10,12 +10,12 @@ app.use(express.json()); // middleware
 app.use(cors());
 
 //-------------------------HEROKU-------------------------
-// const pool = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: {
-//     rejectUnauthorized: false,
-//   },
-// });
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
 //-------------------UTILITY FUNCTIONS-------------------
 function UrlStringValidator(string, characterLength) {
@@ -187,79 +187,8 @@ app.delete("/:id", function (req, res) {
     });
 });
 
-// Update
-// app.put("/:id", (req, res) => {
-//   try {
-//     const clientId = req.params.id;
-//     const videoRating = req.body.rating;
-//     const videoIndex = youTubeData.findIndex(
-//       (video) => video.id === parseInt(clientId)
-//     );
-//     if (videoIndex >= 0) {
-//       const foundVideo = youTubeData[videoIndex]; // selecting the video
-//       foundVideo.rating = videoRating;
-//       console.log(`videoRating${videoRating}`);
-//     }
-//     return res
-//       .status(200)
-//       .json({ result: "success", message: "Video rating has been updated" });
-//   } catch {
-//     res.status(500).json({
-//       result: "failure",
-//       message: "Video could not updated",
-//     });
-//   }
-// });
-
-// app.put("/:id", function (req, res) {
-//   const clientId = parseInt(req.params.id);
-//   const newVideoTitle = req.body.title;
-//   const newVideoUrl = req.body.url;
-//   const videoRating = parseInt(req.body.rating);
-
-//   if (!isValidID(clientId)) {
-//     res.status(404).send();
-//     return;
-//   }
-//   // if (!Number.isInteger(videoRating)) {
-//   //   return res.status(400).send({
-//   //     result: "failure",
-//   //     message: "Video rating must be an integer",
-//   //   });
-//   // }
-//   pool
-//     .query("UPDATE video SET rating=$1, title=$2, url=$3 WHERE id=$4", [
-//       videoRating,
-//       newVideoTitle,
-//       newVideoUrl,
-//       clientId
-//     ])
-//     .then((result) => {
-//       if (result.rowCount === 0) {
-//         return res
-//           .status(400)
-//           .send({
-//             result: `FAILURE`,
-//             message: `This video id does not exist please check your data!`,
-//           });
-//       } else {
-//         res.send({
-//           result: `SUCCESS`,
-//           message: `Video rating ${videoRating} has been updated!`,
-//         });
-//       }
-//     })
-//     .catch((e) => {
-//       console.error(e);
-//       res.status(500).json({
-//         result: "failure",
-//         message: "Video could not updated",
-//       });
-//     });
-// });
-
+/
 app.put("/:id", function (req, res) {
-  // const clientId = parseInt(req.params.id);
   let { id, title, url, rating } = req.body;
   parseInt(id);
   rating = parseInt(rating,10);
