@@ -79,7 +79,6 @@ app.get("/:id", function (req, res) {
     });
 });
 
-
 // create video data
 app.post("/", function (req, res) {
   const newVideoId = Math.floor(Math.random(0, 1) * 1000000);
@@ -217,8 +216,7 @@ app.delete("/:id", function (req, res) {
 //   const newVideoTitle = req.body.title;
 //   const newVideoUrl = req.body.url;
 //   const videoRating = parseInt(req.body.rating);
-  
-  
+
 //   if (!isValidID(clientId)) {
 //     res.status(404).send();
 //     return;
@@ -260,69 +258,64 @@ app.delete("/:id", function (req, res) {
 //     });
 // });
 
-function ratingValidator(number) {
-  if (typeof number !== number) {
-    return parseInt(number)
-  }
-}
-
-
-
 app.put("/:id", function (req, res) {
   // const clientId = parseInt(req.params.id);
-  const {id,title,url,rating }= req.body
-  parseInt(id)
-  parseInt(rating)
+  let { id, title, url, rating } = req.body;
+  parseInt(id);
+  rating = parseInt(rating,10);
 
-  if (!isValidID(clientId)) {
-    res.status(404).send();
-    return;
-  }
-
-   
-   if (!Number.isInteger(id) || id <= 0) {
-     return res
-       .status(400)
-       .send({
-         result: `FAILURE`,
-         message: `Invalid video id ${id}, check your input data`
-       });
-  }
-  
-  pool
-    .query("UPDATE videos SET rating=$1, id=$2, title=$3, url=$4 WHERE id=$5", [
-      rating,
-      id,
-      title,
-      url,
-      id
-    ])
-    .then((result) => {
-      if (result.rowCount === 0) {
-        return res.status(400).send({
-          result: `FAILURE`,
-          message: `This video id does not exist please check your data!`,
-        });
-      } else {
-        res.send({
-          result: `SUCCESS`,
-          message: `Video rating ${rating} has been updated!`,
-        });
-      }
-    })
-    .catch((e) => {
-      console.error(e);
-      res.status(500).json({
-        result: "failure",
-        message: "Video could not updated",
+  try {
+    if (!isValidID(id)) {
+      res.status(404).send({
+        result: `FAILURE`,
+        message: `invalid id ${id}, id does not exist!`,
       });
-    });
+      return;
+    }
+
+    if (!Number.isInteger(rating)) {
+      return res.status(400).send({
+        result: `FAILURE`,
+        message: `Invalid data type ${rating}, you must use integers `,
+      });
+    }
+
+    if (!Number.isInteger(id) || id <= 0) {
+      return res.status(400).send({
+        result: `FAILURE`,
+        message: `Invalid video id ${id}, check your input data`,
+      });
+    }
+
+    pool
+      .query(
+        "UPDATE videos SET rating=$1, id=$2, title=$3, url=$4 WHERE id=$5",
+        [rating, id, title, url, id]
+      )
+      .then((result) => {
+        if (result.rowCount === 0) {
+          return res.status(400).send({
+            result: `FAILURE`,
+            message: `This video id does not exist please check your data!`,
+          });
+        } else {
+          res.send({
+            result: `SUCCESS`,
+            message: `Video rating ${rating} has been updated!`,
+          });
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+        res.status(500).json({
+          result: "failure",
+          message: "Video could not updated",
+        });
+      });
+  } catch(e) {
+    console.error(e.message);
+  }
 });
-
-
-
-
-
 
 const listener = app.listen(process.env.PORT || 5000, function () {
   console.log("Your app is listening on port " + listener.address().port);
