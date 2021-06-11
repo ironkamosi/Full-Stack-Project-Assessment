@@ -4,8 +4,6 @@ const { Pool } = require("pg"); // postgres
 const app = express();
 
 const cors = require("cors");
-const pool = new Pool();
-
 app.use(express.json()); // middleware
 app.use(cors());
 
@@ -187,7 +185,7 @@ app.delete("/:id", function (req, res) {
     });
 });
 
-/
+
 app.put("/:id", function (req, res) {
   let { id, title, url, rating } = req.body;
   parseInt(id);
