@@ -34,12 +34,21 @@ const NewVideoCard = ({ onAdd }) => {
       },
     })
       // Converting to JSON
-      .then((response) => response.json())
+      .then((response) => {
+        //  console.log(response.body);
+
+        if (response.status === 201) {
+          window.location.reload();
+        } 
+          return response.json().then(data=>alert(data.message))
+  
+        // response.json()
+      }) //
       // Displaying results to console
-      .then((json) => {
-        //right here: first time we know the ID for the video
-        onAdd(json);
-      })
+      // .then((json) => {
+      //   //right here: first time we know the ID for the video
+      //   // onAdd(json);
+      // })
       .catch((e) => console.log(e));
   };
 
